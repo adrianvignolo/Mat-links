@@ -1,0 +1,991 @@
+/* ==========================================================================
+   Materiales ConstruY - Página de Enlaces (Linktree Style)
+   Paleta oficial y diseño fiel a materialesconstruy.com
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+/* Tipografías oficiales de marca */
+@font-face {
+  font-family: 'Nitaka';
+  src: url('../fonts/Nitaka.otf') format('opentype'),
+       url('../fonts/Nitaka.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Coolvetica';
+  src: url('../fonts/coolvetica_rg.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Paleta cromática oficial de Materiales ConstruY */
+  --primary-900: #00112b;
+  --primary-800: #001c3b;
+  --primary-700: #1d477b;
+  --primary-600: #113f72;
+  --primary-500: #002952; /* Color institucional principal */
+  --primary-400: #395f94;
+  --primary-300: #86abe5;
+  --primary-200: #bcdbff;
+  --primary-100: #e0efff;
+  --primary-50:  #f0f7ff;
+
+  --accent-700:  #541100;
+  --accent-600:  #872100;
+  --accent-500:  #b02e00; /* Terracota oficial */
+  --accent-400:  #cc3500;
+  --accent-300:  #fc5929;
+  --accent-200:  #ffb5a0;
+  --accent-100:  #ffdbd1;
+  --accent-50:   #fff5f2;
+
+  --whatsapp-green: #25D366;
+  --whatsapp-hover: #20bd5a;
+
+  --bg-page: #f8fafb;
+  --surface-card: #ffffff;
+  --surface-muted: #f1f5f9;
+  --border-light: rgba(0, 41, 82, 0.12);
+  --border-subtle: #e2e8f0;
+
+  --text-main: #002952;
+  --text-body: #334155;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+
+  --font-brand: 'Nitaka', cursive, sans-serif;
+  --font-display: 'Coolvetica', 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Mono', Menlo, Consolas, monospace;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 3px rgba(0, 41, 82, 0.05);
+  --shadow-md: 0 4px 14px -2px rgba(0, 41, 82, 0.08), 0 2px 6px -1px rgba(0, 41, 82, 0.04);
+  --shadow-lg: 0 12px 30px -6px rgba(0, 41, 82, 0.12), 0 4px 12px -2px rgba(0, 41, 82, 0.06);
+  --shadow-accent: 0 8px 24px -4px rgba(176, 46, 0, 0.35);
+
+  --transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset y base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-page);
+  color: var(--text-body);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Trama geométrica industrial idéntica a materialesconstruy.com */
+.bg-grid-pattern {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.035;
+  background-image: 
+    linear-gradient(var(--primary-500) 1px, transparent 1px),
+    linear-gradient(90deg, var(--primary-500) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Franja superior de marca */
+.top-brand-strip {
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary-500) 0%, var(--primary-500) 70%, var(--accent-500) 70%, var(--accent-500) 100%);
+  position: relative;
+  z-index: 10;
+}
+
+/* Cinta de colores rodante de ConstruY */
+.cinta-colores-bar {
+  width: 100%;
+  height: 14px;
+  background-image: url('../assets/cinta-colores.webp');
+  background-repeat: repeat-x;
+  background-position: center;
+  background-size: auto 14px;
+  opacity: 0.95;
+  position: relative;
+  z-index: 10;
+}
+
+/* Contenedor principal estilo Linktree */
+.linktree-container {
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 24px 18px 48px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Acciones en la cabecera superior (Compartir y QR) */
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.action-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--primary-500);
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.action-pill-btn:hover {
+  background: var(--primary-50);
+  border-color: var(--primary-300);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.action-pill-btn svg {
+  width: 15px;
+  height: 15px;
+  stroke-width: 2.2;
+}
+
+/* Perfil de Marca */
+.brand-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 28px;
+  position: relative;
+}
+
+.avatar-wrapper {
+  position: relative;
+  width: 108px;
+  height: 108px;
+  margin-bottom: 16px;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3.5px solid var(--surface-card);
+  box-shadow: 0 0 0 3px var(--primary-500), 0 10px 24px -4px rgba(0, 41, 82, 0.25);
+  background: #ffffff;
+  transition: transform var(--transition-smooth);
+}
+
+.avatar-wrapper:hover .avatar-img {
+  transform: scale(1.04) rotate(1deg);
+}
+
+/* Insignia de verificación */
+.verified-badge {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 26px;
+  height: 26px;
+  background: var(--accent-500);
+  color: #ffffff;
+  border: 2.5px solid #ffffff;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.verified-badge svg {
+  width: 14px;
+  height: 14px;
+  stroke-width: 2.8;
+}
+
+/* Wordmark de marca */
+.brand-wordmark {
+  max-height: 38px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.brand-title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--primary-500);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.brand-handle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--accent-500);
+  font-size: 13.5px;
+  font-weight: 700;
+  text-decoration: none;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+  padding: 3px 10px;
+  background: var(--accent-50);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--accent-100);
+  transition: all var(--transition-fast);
+}
+
+.brand-handle:hover {
+  background: var(--accent-100);
+  color: var(--accent-600);
+  transform: translateY(-1px);
+}
+
+.brand-bio {
+  color: var(--text-body);
+  font-size: 14px;
+  font-weight: 500;
+  max-width: 440px;
+  line-height: 1.55;
+  margin-bottom: 14px;
+}
+
+/* Indicador de estado en vivo */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary-500);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: var(--font-mono);
+  box-shadow: var(--shadow-sm);
+}
+
+.status-dot-pulse {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10b981;
+}
+
+.status-dot-pulse::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background-color: rgba(16, 185, 129, 0.4);
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.8); opacity: 0; }
+  100% { transform: scale(0.9); opacity: 0; }
+}
+
+/* Barra de Redes Sociales y Accesos Directos */
+.social-buttons-bar {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 26px;
+  flex-wrap: wrap;
+}
+
+.social-icon-btn {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--primary-500);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  position: relative;
+}
+
+.social-icon-btn svg {
+  width: 20px;
+  height: 20px;
+  transition: transform var(--transition-fast);
+}
+
+.social-icon-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-300);
+  color: var(--accent-500);
+}
+
+.social-icon-btn.btn-instagram:hover {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  color: #ffffff;
+  border-color: transparent;
+}
+
+.social-icon-btn.btn-whatsapp:hover {
+  background: var(--whatsapp-green);
+  color: #ffffff;
+  border-color: transparent;
+}
+
+.social-icon-btn.btn-map:hover {
+  background: var(--primary-500);
+  color: #ffffff;
+  border-color: transparent;
+}
+
+/* Lista de Enlaces (Linktree Links) */
+.links-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+/* Tarjeta individual de enlace */
+.link-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+/* Borde acento inferior que se expande al hover (estilo tienda ConstruY) */
+.link-card::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3.5px;
+  width: 100%;
+  background: var(--accent-500);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(0, 41, 82, 0.2);
+}
+
+.link-card:hover::after {
+  transform: scaleX(1);
+}
+
+/* Tarjeta destacada (Tienda Online) */
+.link-card.featured-card {
+  background: linear-gradient(135deg, #ffffff 0%, var(--primary-50) 100%);
+  border: 1.5px solid var(--primary-200);
+  box-shadow: 0 6px 20px -3px rgba(0, 41, 82, 0.12);
+}
+
+.link-card.featured-card::after {
+  transform: scaleX(1);
+  background: linear-gradient(90deg, var(--primary-500), var(--accent-500));
+}
+
+.link-card.featured-card:hover {
+  border-color: var(--accent-400);
+  box-shadow: 0 12px 28px -4px rgba(176, 46, 0, 0.2);
+}
+
+/* Tarjeta WhatsApp */
+.link-card.whatsapp-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+  border-color: #bbf7d0;
+}
+
+.link-card.whatsapp-card::after {
+  background: var(--whatsapp-green);
+}
+
+.link-card.whatsapp-card:hover {
+  border-color: var(--whatsapp-green);
+}
+
+/* Contenedor del icono del enlace */
+.link-icon-box {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  background: var(--primary-50);
+  border: 1px solid var(--primary-100);
+  color: var(--primary-500);
+  display: grid;
+  place-items: center;
+  transition: all var(--transition-fast);
+}
+
+.link-card:hover .link-icon-box {
+  background: var(--primary-500);
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+.link-card.featured-card .link-icon-box {
+  background: var(--primary-500);
+  color: #ffffff;
+}
+
+.link-card.featured-card:hover .link-icon-box {
+  background: var(--accent-500);
+}
+
+.link-card.whatsapp-card .link-icon-box {
+  background: #dcfce7;
+  color: var(--whatsapp-green);
+  border-color: #bbf7d0;
+}
+
+.link-card.whatsapp-card:hover .link-icon-box {
+  background: var(--whatsapp-green);
+  color: #ffffff;
+}
+
+.link-icon-box svg {
+  width: 24px;
+  height: 24px;
+  stroke-width: 2;
+}
+
+/* Contenido de texto del enlace */
+.link-text-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.link-header-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+  flex-wrap: wrap;
+}
+
+.link-title {
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--primary-500);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.link-card:hover .link-title {
+  color: var(--accent-500);
+}
+
+.link-card.featured-card .link-title {
+  color: var(--primary-800);
+}
+
+.badge-tag {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  background: var(--accent-50);
+  color: var(--accent-500);
+  border: 1px solid var(--accent-100);
+  white-space: nowrap;
+}
+
+.badge-tag.tag-featured {
+  background: var(--primary-500);
+  color: #ffffff;
+  border-color: var(--primary-500);
+}
+
+.badge-tag.tag-whatsapp {
+  background: #dcfce7;
+  color: #166534;
+  border-color: #bbf7d0;
+}
+
+.link-subtitle {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Indicador de flecha en el extremo */
+.link-arrow {
+  color: var(--text-light);
+  flex-shrink: 0;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.link-arrow svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2.2;
+}
+
+.link-card:hover .link-arrow {
+  transform: translateX(4px);
+  color: var(--accent-500);
+}
+
+/* Mini paleta de muestra en la tarjeta de colores */
+.swatch-preview-dots {
+  display: flex;
+  gap: 4px;
+  margin-top: 5px;
+}
+
+.swatch-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+/* Sección de Ubicación destacada (Tarjeta con Mini-mapa) */
+.location-preview-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 24px;
+}
+
+.location-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.location-title-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.location-title-box svg {
+  color: var(--accent-500);
+}
+
+.location-title-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary-500);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-family: var(--font-mono);
+}
+
+.map-wrapper {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 12px;
+  background: var(--surface-muted);
+}
+
+.map-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.location-actions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.btn-route {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-family: var(--font-mono);
+  transition: all var(--transition-fast);
+}
+
+.btn-route-maps {
+  background: var(--primary-500);
+  color: #ffffff;
+}
+
+.btn-route-maps:hover {
+  background: var(--primary-700);
+  transform: translateY(-1px);
+}
+
+.btn-route-waze {
+  background: #33ccff;
+  color: #002952;
+}
+
+.btn-route-waze:hover {
+  background: #1ab8ed;
+  transform: translateY(-1px);
+}
+
+.btn-route svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Tarjeta informativa de contacto rápido */
+.contact-meta-card {
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--text-body);
+}
+
+.contact-meta-item svg {
+  color: var(--accent-500);
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
+}
+
+.contact-meta-item a {
+  color: var(--primary-500);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.contact-meta-item a:hover {
+  color: var(--accent-500);
+  text-decoration: underline;
+}
+
+/* Pie de página */
+.linktree-footer {
+  margin-top: auto;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-subtle);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-brand {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary-500);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.footer-meta {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+.footer-link {
+  color: var(--accent-500);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+/* Modal Emergente Base */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 25, 50, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 999;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 25px 50px -12px rgba(0, 41, 82, 0.35);
+  border: 1px solid var(--border-subtle);
+  position: relative;
+  transform: scale(0.95) translateY(10px);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-overlay.active .modal-content {
+  transform: scale(1) translateY(0);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-muted);
+  color: var(--text-body);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.modal-close-btn:hover {
+  background: var(--primary-500);
+  color: #ffffff;
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--primary-500);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.modal-subtitle {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+/* QR Modal Específico */
+.qr-code-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  margin-bottom: 20px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.03);
+}
+
+.qr-code-box canvas, .qr-code-box svg {
+  max-width: 220px;
+  max-height: 220px;
+  width: 100%;
+  height: auto;
+}
+
+.qr-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-secondary {
+  flex: 1;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  background: var(--primary-500);
+  color: #ffffff;
+  border: none;
+  font-weight: 700;
+  font-size: 13px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all var(--transition-fast);
+}
+
+.btn-secondary:hover {
+  background: var(--primary-700);
+  transform: translateY(-1px);
+}
+
+/* Toast de notificación */
+.toast-notice {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--primary-500);
+  color: #ffffff;
+  padding: 12px 22px;
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 25px -4px rgba(0, 41, 82, 0.4);
+  z-index: 1000;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.toast-notice.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.toast-notice svg {
+  color: #10b981;
+}
+
+/* Adaptación responsive */
+@media (max-width: 480px) {
+  .linktree-container {
+    padding: 16px 14px 40px;
+  }
+  
+  .avatar-wrapper {
+    width: 96px;
+    height: 96px;
+  }
+
+  .brand-title {
+    font-size: 22px;
+  }
+
+  .link-card {
+    padding: 14px 14px;
+    gap: 12px;
+  }
+
+  .link-icon-box {
+    width: 42px;
+    height: 42px;
+  }
+
+  .link-icon-box svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .link-title {
+    font-size: 14.5px;
+  }
+
+  .link-subtitle {
+    font-size: 11.5px;
+  }
+}
