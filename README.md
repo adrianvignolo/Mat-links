@@ -2,7 +2,12 @@
 
 Página de enlaces oficial móvil y de alta conversión inspirada en el diseño y branding de [materialesconstruy.com](https://materialesconstruy.com).
 
-## 🚀 Acceso en Desarrollo Local
+## 🌐 Visualización en Vivo (Para ti y el Cliente)
+
+- **Enlace público en vivo (GitHub Pages):** [https://adrianvignolo.github.io/materialesconstruy-links/](https://adrianvignolo.github.io/materialesconstruy-links/)
+- **Repositorio en GitHub:** [https://github.com/adrianvignolo/materialesconstruy-links](https://github.com/adrianvignolo/materialesconstruy-links)
+
+## 🚀 Acceso en Servidor Local (Wamp64)
 
 - **Servidor Apache Wamp64**: [http://localhost:8080/materialesconstruy-links/](http://localhost:8080/materialesconstruy-links/)
 - O abriendo directamente `index.html` en cualquier navegador web.
